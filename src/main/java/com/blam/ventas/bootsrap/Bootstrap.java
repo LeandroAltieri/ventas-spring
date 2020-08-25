@@ -1,7 +1,7 @@
 package com.blam.ventas.bootsrap;
 
-import com.blam.ventas.model.Category;
-import com.blam.ventas.model.Product;
+import com.blam.ventas.domain.Category;
+import com.blam.ventas.domain.Product;
 import com.blam.ventas.repositories.CategoryRepository;
 import com.blam.ventas.repositories.ProductRepository;
 import org.springframework.boot.CommandLineRunner;

@@ -1,8 +1,6 @@
-package com.blam.ventas.model;
+package com.blam.ventas.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 
 @Entity
