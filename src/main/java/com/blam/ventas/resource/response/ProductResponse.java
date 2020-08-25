@@ -1,31 +1,22 @@
-package com.blam.ventas.model;
+package com.blam.ventas.resource.response;
 
-import javax.persistence.*;
+import com.blam.ventas.domain.Category;
+import com.blam.ventas.domain.Product;
 
-import java.util.List;
+public class ProductResponse {
 
-@Entity
-@Table(name = "products")
-public class Product{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "prod_id")
     private Long id;
 
-    @Column(name = "prod_name")
     private String name;
 
-    @Column(name = "prod_price")
     private Double price;
 
-    @ManyToOne
-    @JoinColumn
     private Category category;
 
-    public Product() {
+    public ProductResponse() {
     }
 
-    public Product(Long id, String name, Double price, Category category) {
+    public ProductResponse(Long id, String name, Double price, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -62,5 +53,12 @@ public class Product{
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public static ProductResponse from(Product product){
+        return new ProductResponse(product.getId(),
+                                    product.getName(),
+                                    product.getPrice(),
+                                    product.getCategory());
     }
 }
