@@ -8,6 +8,9 @@ public class CategoryResponse {
 
     private String name;
 
+    public CategoryResponse() {
+    }
+
     public CategoryResponse(Long id, String name) {
         this.id = id;
         this.name = name;
