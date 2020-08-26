@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -40,13 +41,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> findAll() {
-       List<Product> products  = new ArrayList<>();
-        products.forEach(product -> products.add(product));
+    public List<Product> findAll() {
+        List<Product> products = new ArrayList<>();
+       productRepository.findAll().iterator().forEachRemaining(products::add);
+       return products;
+    }
+
+
+    @Override
+    public List<ProductResponse> findAllResponse() {
+       List<Product> products  = findAll();
         List<ProductResponse> responses = new ArrayList<>();
-        for (Product product : products){
-           responses.add(productToProductResponse.convert(product));
-        }
+        products.forEach(product -> products.add(product));
+        products.forEach(product -> responses.add(productToProductResponse.convert(product)));
             return responses;
     }
 
@@ -57,17 +64,5 @@ public class ProductServiceImpl implements ProductService {
         return productToProductResponse.convert(product);
     }
 
-    @Override
-    public Product findByCategory(String name) {
-        Product product = productRepository.findByCategoryName(name);
-            if(product ==null){
-                throw new RuntimeException("Not Found");
-            }
-        return product;
-    }
 
-    @Override
-    public ProductResponse findResponseByCategory(String name) {
-        return productToProductResponse.convert(findByCategory(name));
-    }
 }

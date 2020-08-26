@@ -15,7 +15,6 @@ public class ProductRequestToProduct implements Converter<ProductRequest, Produc
         product.setId(productRequest.getId());
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
-        product.setCategory(productRequest.getCategory());
 
         return product;
     }

@@ -13,14 +13,15 @@ public interface ProductService {
 
     ProductResponse findResponseById(Long id);
 
+    List<Product> findAll();
 
-    List<ProductResponse> findAll();
+    List<ProductResponse> findAllResponse();
 
     ProductResponse findByName(String name);
 
-    Product findByCategory (String name);
 
-    ProductResponse findResponseByCategory(String name);
+
+
 
 
 
