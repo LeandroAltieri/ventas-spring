@@ -1,6 +1,5 @@
 package com.blam.ventas.resource.request;
 
-import com.blam.ventas.domain.Category;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,18 +14,17 @@ public class ProductRequest {
     @JsonProperty("price")
     private Double price;
 
-    @JsonProperty("category")
-    private Category category;
+
 
     @JsonCreator
     public ProductRequest(@JsonProperty("id") Long id,
                           @JsonProperty("name") String name,
-                          @JsonProperty("price") Double price,
-                          @JsonProperty("category") Category category) {
+                          @JsonProperty("price") Double price)
+                          {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.category = category;
+
     }
 
     public Long getId() {
@@ -53,11 +51,4 @@ public class ProductRequest {
         this.price = price;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }

@@ -17,7 +17,6 @@ public class ProductToProductResponse implements Converter <Product, ProductResp
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
         productResponse.setPrice(product.getPrice());
-        productResponse.setCategory(product.getCategory());
 
         return productResponse;
     }

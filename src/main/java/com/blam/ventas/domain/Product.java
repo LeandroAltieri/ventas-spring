@@ -18,18 +18,16 @@ public class Product{
     @Column(name = "prod_price")
     private Double price;
 
-    @ManyToOne
-    @JoinColumn
-    private Category category;
 
     public Product() {
     }
 
-    public Product(Long id, String name, Double price, Category category) {
+
+    public Product(Long id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.category = category;
+
     }
 
     public Long getId() {
@@ -56,13 +54,6 @@ public class Product{
         this.price = price;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     @Override
     public String toString() {
@@ -70,14 +61,7 @@ public class Product{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", category=" + category +
                 '}';
     }
-
-    public static Product from(ProductRequest productRequest){
-        return new Product(productRequest.getId(),
-                            productRequest.getName(),
-                            productRequest.getPrice(),
-                            productRequest.getCategory());
-    }
 }
+

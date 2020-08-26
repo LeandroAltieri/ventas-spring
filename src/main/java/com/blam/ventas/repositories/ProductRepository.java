@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository  extends CrudRepository<Product, Long> {
     Product findByName(String name);
 
-    Product findByCategoryName(String name);
 }

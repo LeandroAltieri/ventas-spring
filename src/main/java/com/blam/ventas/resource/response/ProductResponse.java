@@ -1,8 +1,5 @@
 package com.blam.ventas.resource.response;
 
-import com.blam.ventas.domain.Category;
-import com.blam.ventas.domain.Product;
-
 public class ProductResponse {
 
     private Long id;
@@ -11,16 +8,16 @@ public class ProductResponse {
 
     private Double price;
 
-    private Category category;
+
 
     public ProductResponse() {
     }
 
-    public ProductResponse(Long id, String name, Double price, Category category) {
+    public ProductResponse(Long id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.category = category;
+
     }
 
     public Long getId() {
@@ -47,18 +44,12 @@ public class ProductResponse {
         this.price = price;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public static ProductResponse from(Product product){
-        return new ProductResponse(product.getId(),
-                                    product.getName(),
-                                    product.getPrice(),
-                                    product.getCategory());
+    @Override
+    public String toString() {
+        return "ProductResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
