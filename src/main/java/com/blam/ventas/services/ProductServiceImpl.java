@@ -78,9 +78,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse newProduct(ProductRequest productRequest) {
-         ProductResponse responseById = findResponseById(productRequest.getId());
+
          ProductResponse responseByName = findResponseByName(productRequest.getName());
-         if(responseById==null && responseByName ==null){
+         if(responseByName == null){
            Product product =  productRequestToProduct.convert(productRequest);
            productRepository.save(product);
            return productToProductResponse.convert(product);
