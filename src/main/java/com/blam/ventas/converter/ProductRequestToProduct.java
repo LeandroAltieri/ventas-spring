@@ -3,7 +3,9 @@ package com.blam.ventas.converter;
 import com.blam.ventas.domain.Product;
 import com.blam.ventas.resource.request.ProductRequest;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductRequestToProduct implements Converter<ProductRequest, Product> {
 
     @Override
