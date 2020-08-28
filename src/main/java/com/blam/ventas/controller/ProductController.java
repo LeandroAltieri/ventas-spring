@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @RestController
-
 public class ProductController {
 
     private final ProductService productService;
@@ -42,6 +41,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value ="/products",produces = "application/json")
     public @ResponseBody ResponseEntity<List<ProductResponse>> getAllProducts(){
         List<ProductResponse> products = productService.findAllResponse();
@@ -60,6 +60,7 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(produces = "application/json", consumes = "application/json")
     @RequestMapping(value = "/new")
     public @ResponseBody ResponseEntity<ProductResponse> newProduct(@RequestBody ProductRequest productRequest){
@@ -71,6 +72,7 @@ public class ProductController {
        return new ResponseEntity<>(productService.updateProduct(productRequest), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(value = "{id}/delete")
     public @ResponseBody ResponseEntity deleteById(@PathVariable("id") Long id){
         productService.deleteById(id);
