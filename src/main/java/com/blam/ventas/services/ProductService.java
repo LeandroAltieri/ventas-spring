@@ -1,6 +1,7 @@
 package com.blam.ventas.services;
 
 import com.blam.ventas.domain.Product;
+import com.blam.ventas.resource.request.ProductRequest;
 import com.blam.ventas.resource.response.ProductResponse;
 
 import java.util.List;
@@ -17,7 +18,14 @@ public interface ProductService {
 
     List<ProductResponse> findAllResponse();
 
-    ProductResponse findByName(String name);
+    Product findByName(String name);
+    ProductResponse findResponseByName(String name);
+
+    ProductResponse newProduct(ProductRequest productRequest);
+
+    ProductResponse updateProduct(ProductRequest productRequest);
+
+    void deleteById(Long id);
 
 
 

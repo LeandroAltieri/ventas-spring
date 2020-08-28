@@ -25,21 +25,21 @@ public class Bootstrap implements CommandLineRunner {
 
         //Product create and save
         Product leche = new Product();
-        leche.setName("Milkaut Largavida 1l");
+        leche.setName("Milkaut");
         leche.setPrice(47.90);
 
 
         productRepository.save(leche);
 
         Product quilmes = new Product();
-        quilmes.setName("Quilmes 1l");
+        quilmes.setName("Quilmes");
         quilmes.setPrice(78.50);
 
 
         productRepository.save(quilmes);
 
         Product pitusas = new Product();
-        pitusas.setName("Pitusas 400gr");
+        pitusas.setName("Pitusas");
         pitusas.setPrice(30.00);
 
 
@@ -52,7 +52,7 @@ public class Bootstrap implements CommandLineRunner {
 
         System.out.println("Product Response " + productService.findAll());
 
-        System.out.println("Product by name " + productService.findByName("Quilmes 1l").toString());
+        System.out.println("Product by name " + productService.findByName("Quilmes").toString());
 
 
     }
