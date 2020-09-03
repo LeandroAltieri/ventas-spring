@@ -1,36 +1,36 @@
-package com.blam.ventas.resource.request;
+package com.blam.ventas.resource.response;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.blam.ventas.domain.Sale;
 
-public class ProductRequest {
+public class ProductSoldResponse {
 
-    @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("price")
     private Double price;
 
-    @JsonProperty("quantity")
     private Double quantity;
 
-    @JsonCreator
-    public ProductRequest(@JsonProperty("id") Long id,
-                          @JsonProperty("name") String name,
-                          @JsonProperty("price") Double price,
-                          @JsonProperty("quantity") Double quantity)
-                          {
+    private Sale sale;
+
+    public ProductSoldResponse() {
+    }
+
+    public ProductSoldResponse(String name, Double price, Double quantity, Sale sale) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.sale = sale;
+    }
+
+    public ProductSoldResponse(Long id, String name, Double price, Double quantity, Sale sale) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-
+        this.sale = sale;
     }
-
-
 
     public Long getId() {
         return id;
@@ -62,5 +62,13 @@ public class ProductRequest {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
 }
