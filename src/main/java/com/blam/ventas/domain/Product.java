@@ -3,10 +3,11 @@ package com.blam.ventas.domain;
 import com.blam.ventas.resource.request.ProductRequest;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "products")
-public class Product{
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "prod_id")
@@ -28,6 +29,11 @@ public class Product{
         this.name = name;
         this.price = price;
 
+    }
+
+    public Product(String name, Double price){
+        this.name = name;
+        this.price = price;
     }
 
     public Long getId() {

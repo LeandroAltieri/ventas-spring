@@ -23,6 +23,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value= "/{id}", produces = "application/json")
     public @ResponseBody ResponseEntity<ProductResponse> getProductById(@PathVariable("id") Long id){
         ProductResponse product = productService.findResponseById(id);
@@ -32,7 +33,8 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(value = "/sales/{name}", produces = "application/json")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/sales/add/{name}", produces = "application/json")
     public @ResponseBody ResponseEntity<ProductResponse> getProductByName(@PathVariable("name") String name){
         ProductResponse product = productService.findResponseByName(name);
         if(product !=null) {
@@ -51,6 +53,7 @@ public class ProductController {
             return new ResponseEntity<>(products , HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/{id}/edit" )
     public @ResponseBody ResponseEntity<ProductResponse> editProductForm(@PathVariable("id") Long id){
         ProductResponse product = productService.findResponseById(id);
@@ -67,6 +70,7 @@ public class ProductController {
            return new ResponseEntity<>(productService.newProduct(productRequest), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(produces = "application/json", consumes = "application/json",value = "/{id}/edit")
     public @ResponseBody ResponseEntity<ProductResponse> updateProduct(@RequestBody ProductRequest productRequest){
        return new ResponseEntity<>(productService.updateProduct(productRequest), HttpStatus.OK);
@@ -74,7 +78,7 @@ public class ProductController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(value = "{id}/delete")
-    public @ResponseBody ResponseEntity deleteById(@PathVariable("id") Long id){
+    public @ResponseBody ResponseEntity <?> deleteById(@PathVariable("id") Long id){
         productService.deleteById(id);
        return new ResponseEntity(HttpStatus.OK);
     }

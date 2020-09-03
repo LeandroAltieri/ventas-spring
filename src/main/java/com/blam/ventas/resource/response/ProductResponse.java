@@ -8,6 +8,9 @@ public class ProductResponse {
 
     private Double price;
 
+    private Double quantity;
+
+
 
 
     public ProductResponse() {
@@ -20,6 +23,23 @@ public class ProductResponse {
 
     }
 
+    public ProductResponse(String name, Double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public ProductResponse(Long id, String name, Double price, Double quantity) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public ProductResponse(String name, Double price, Double quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public Long getId() {
         return id;
@@ -43,6 +63,18 @@ public class ProductResponse {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
+
+    public Double Total(){
+        return this.quantity * this.price;
+    }
+
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     @Override

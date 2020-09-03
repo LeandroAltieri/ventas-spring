@@ -1,11 +1,10 @@
 package com.blam.ventas.resource.request;
 
+import com.blam.ventas.domain.Sale;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ProductRequest {
-
-    @JsonProperty("id")
+public class ProductSoldRequest {
     private Long id;
 
     @JsonProperty("name")
@@ -18,19 +17,19 @@ public class ProductRequest {
     private Double quantity;
 
     @JsonCreator
-    public ProductRequest(@JsonProperty("id") Long id,
-                          @JsonProperty("name") String name,
-                          @JsonProperty("price") Double price,
-                          @JsonProperty("quantity") Double quantity)
-                          {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-
+    public ProductSoldRequest() {
     }
 
+    @JsonCreator
+    public ProductSoldRequest(@JsonProperty("name") String name, @JsonProperty("quantity") Double quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 
+    @JsonCreator
+    public ProductSoldRequest(@JsonProperty("name") String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
