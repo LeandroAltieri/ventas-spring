@@ -50,13 +50,14 @@ public class SellController {
 
     @PostMapping(value = "/sell/remove/{index}")
     public @ResponseBody ResponseEntity<?> removeProduct(@PathVariable("index") Integer index, HttpServletRequest request){
+
         ArrayList<ProductResponse> cart = this.getCart(request);
         ProductResponse productToRemove =  cart.get(index);
         cart.remove(productToRemove);
         this.saveCart(cart, request);
         return new ResponseEntity<>(cart ,HttpStatus.OK);
     }
-    /*BRIAN PETE LAGUERO*/
+
 
 
 
