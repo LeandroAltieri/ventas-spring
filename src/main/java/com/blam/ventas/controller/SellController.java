@@ -34,7 +34,7 @@ public class SellController {
             total += p.Total();
         }
 
-        return new ResponseEntity<>(total, HttpStatus.OK);
+        return new ResponseEntity<>(cart,  HttpStatus.OK);
     }
 
     @PostMapping(produces = "application/json", consumes = "application/json")
@@ -45,10 +45,17 @@ public class SellController {
         productByName.setQuantity(product.getQuantity());
         cart.add(productByName);
         this.saveCart(cart, request);
-        return new ResponseEntity<>("Product added", HttpStatus.OK);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-
+    @PostMapping(value = "/sell/remove/{index}")
+    public @ResponseBody ResponseEntity<?> removeProduct(@PathVariable("index") Integer index, HttpServletRequest request){
+        ArrayList<ProductResponse> cart = this.getCart(request);
+        ProductResponse productToRemove =  cart.get(index);
+        cart.remove(productToRemove);
+        this.saveCart(cart, request);
+        return new ResponseEntity<>(cart ,HttpStatus.OK);
+    }
 
 
 
@@ -66,5 +73,9 @@ public class SellController {
 
     private void saveCart(ArrayList<ProductResponse> cart, HttpServletRequest request){
         request.getSession().setAttribute("cart" , cart);
+    }
+
+    private void cleanCart(HttpServletRequest request){
+        this.saveCart(new ArrayList<>(), request);
     }
 }
