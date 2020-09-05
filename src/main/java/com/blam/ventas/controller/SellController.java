@@ -36,6 +36,7 @@ public class SellController {
         }
         System.out.println(total);
         return new ResponseEntity<>(cart, HttpStatus.OK);
+
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -50,6 +51,20 @@ public class SellController {
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/sell/remove/{index}")
+    public @ResponseBody ResponseEntity<?> removeProduct(@PathVariable("index") Integer index, HttpServletRequest request){
+        ArrayList<ProductResponse> cart = this.getCart(request);
+        ProductResponse productToRemove =  cart.get(index);
+        cart.remove(productToRemove);
+        this.saveCart(cart, request);
+        return new ResponseEntity<>(cart ,HttpStatus.OK);
+    }
+
+
+
+
+
+
 
     private ArrayList<ProductResponse> getCart(HttpServletRequest request){
         ArrayList<ProductResponse> cart = (ArrayList<ProductResponse>) request.getSession().getAttribute("cart");
@@ -61,5 +76,9 @@ public class SellController {
 
     private void saveCart(ArrayList<ProductResponse> cart, HttpServletRequest request){
         request.getSession().setAttribute("cart" , cart);
+    }
+
+    private void cleanCart(HttpServletRequest request){
+        this.saveCart(new ArrayList<>(), request);
     }
 }
