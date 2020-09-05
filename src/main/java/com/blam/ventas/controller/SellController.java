@@ -25,6 +25,7 @@ public class SellController {
         this.productService = productService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/sell")
     public @ResponseBody ResponseEntity<?> getSell (HttpServletRequest request){
         Double total = 0.0;
@@ -33,10 +34,11 @@ public class SellController {
         for(ProductResponse p : cart){
             total += p.Total();
         }
-
-        return new ResponseEntity<>(total, HttpStatus.OK);
+        System.out.println(total);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(produces = "application/json", consumes = "application/json")
     @RequestMapping("/sell/add")
     public @ResponseBody ResponseEntity<?> addProduct(@RequestBody ProductRequest product, HttpServletRequest request){
@@ -45,15 +47,8 @@ public class SellController {
         productByName.setQuantity(product.getQuantity());
         cart.add(productByName);
         this.saveCart(cart, request);
-        return new ResponseEntity<>("Product added", HttpStatus.OK);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
-
-
-
-
-
-
-
 
 
     private ArrayList<ProductResponse> getCart(HttpServletRequest request){

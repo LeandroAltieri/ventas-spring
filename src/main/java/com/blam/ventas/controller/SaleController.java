@@ -25,6 +25,7 @@ public class SaleController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/sales/list")
     public @ResponseBody ResponseEntity<List<SaleResponse>> getAllSales(){
         List<SaleResponse> sales = saleService.findAllResponse();
