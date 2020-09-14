@@ -2,6 +2,7 @@ package com.blam.ventas.services;
 
 import com.blam.ventas.converter.SaleToSaleResponse;
 import com.blam.ventas.domain.Sale;
+import com.blam.ventas.exceptions.BadRequestException;
 import com.blam.ventas.repositories.SaleRepository;
 import com.blam.ventas.resource.response.SaleResponse;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public Sale findById(Long id) {
        Optional <Sale> sale = saleRepository.findById(id);
+       if(sale == null){
+           throw new BadRequestException("BAD REQUEST!!!!");
+       }
         return sale.orElse(null);
     }
 
@@ -53,7 +57,7 @@ public class SaleServiceImpl implements SaleService {
     public Sale findByDate(Date date) {
         Sale sale = saleRepository.findByDate(date);
         if (sale ==null){
-            return null;
+            throw new BadRequestException("BAD REQUEST!!!!");
         }
         return sale;
     }

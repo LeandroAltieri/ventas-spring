@@ -3,6 +3,7 @@ package com.blam.ventas.services;
 import com.blam.ventas.converter.ProductRequestToProduct;
 import com.blam.ventas.converter.ProductToProductResponse;
 import com.blam.ventas.domain.Product;
+import com.blam.ventas.exceptions.BadRequestException;
 import com.blam.ventas.repositories.ProductRepository;
 import com.blam.ventas.resource.request.ProductRequest;
 import com.blam.ventas.resource.response.ProductResponse;
@@ -31,7 +32,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findById(Long id) {
         Optional<Product> product = productRepository.findById(id);
-        // throw new RuntimeException("Not found");
+        if(product==null){
+         throw new BadRequestException("BAD REQUEST!!!!");
+        }
         return product.orElse(null);
 
     }
@@ -64,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findByName(String name) {
         Product product = productRepository.findByName(name);
             if(product == null) {
-                return null;
+               throw new BadRequestException("BAD REQUEST!!!!");
             }
             return product;
     }
@@ -85,7 +88,7 @@ public class ProductServiceImpl implements ProductService {
            productRepository.save(product);
            return productToProductResponse.convert(product);
          }
-         throw new RuntimeException("Product exist");
+         throw new BadRequestException("BAD REQUEST!!!!");
 
     }
 
