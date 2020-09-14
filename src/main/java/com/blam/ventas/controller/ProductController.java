@@ -48,7 +48,7 @@ public class ProductController {
     public @ResponseBody ResponseEntity<List<ProductResponse>> getAllProducts(){
         List<ProductResponse> products = productService.findAllResponse();
         if(products.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
             return new ResponseEntity<>(products , HttpStatus.OK);
     }

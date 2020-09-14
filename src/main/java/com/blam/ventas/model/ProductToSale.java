@@ -9,8 +9,8 @@ public class ProductToSale extends ProductResponse {
     public ProductToSale() {
     }
 
-    public ProductToSale(Long id, String name, Double price, Double quantity) {
-        super(id, name, price);
+    public ProductToSale(Long id, String name, Double price, Double quantity, Double total) {
+        super(id, name, price,total );
         this.quantity = quantity;
 
     }

@@ -10,36 +10,43 @@ public class ProductResponse {
 
     private Double quantity;
 
-
-
+    private Double total;
 
     public ProductResponse() {
     }
 
-    public ProductResponse(Long id, String name, Double price) {
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public ProductResponse(Long id, String name, Double price, Double total) {
         this.id = id;
         this.name = name;
         this.price = price;
-
+        this.total = total;
     }
 
     public ProductResponse(String name, Double price) {
         this.name = name;
         this.price = price;
     }
-
+/*
     public ProductResponse(Long id, String name, Double price, Double quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
     }
-
-    public ProductResponse(String name, Double price, Double quantity) {
+*/
+   /* public ProductResponse(String name, Double price, Double quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -70,7 +77,8 @@ public class ProductResponse {
     }
 
     public Double Total(){
-        return this.quantity * this.price;
+        this.total = this.quantity * this.price;
+        return this.total;
     }
 
     public void setQuantity(Double quantity) {
