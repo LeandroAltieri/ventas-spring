@@ -29,10 +29,7 @@ public class SaleController {
     @GetMapping("/sales/list")
     public @ResponseBody ResponseEntity<List<SaleResponse>> getAllSales(){
         List<SaleResponse> sales = saleService.findAllResponse();
-            if(sales ==null){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            return new ResponseEntity<>(sales, HttpStatus.OK);
+        return new ResponseEntity<>(sales, HttpStatus.OK);
     }
 
 
