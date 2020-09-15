@@ -73,7 +73,11 @@ public class SaleServiceImpl implements SaleService {
         return new Sale();
     }
 
-
+    @Override
+    public Sale save(Sale sale) {
+        saleRepository.save(sale);
+        return sale;
+    }
 
 
 }

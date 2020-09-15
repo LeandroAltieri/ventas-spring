@@ -63,6 +63,11 @@ public class SaleResponse {
     }
 
     public Double getTotal() {
+        Double total = 0.0;
+        for (ProductSold p : productsSold) {
+            total += p.getTotal();
+        }
+
         return total;
     }
 

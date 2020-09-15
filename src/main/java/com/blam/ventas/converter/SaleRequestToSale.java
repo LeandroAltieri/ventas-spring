@@ -16,7 +16,7 @@ public class SaleRequestToSale implements Converter<SaleRequest, Sale> {
         sale.setId(saleRequest.getId());
         sale.setClientName(saleRequest.getClientName());
         sale.setDate(saleRequest.getDate());
-       // sale.setProducts(saleRequest.getProductResponses());
+        sale.setProducts(saleRequest.getProductsSold());
         sale.setTotal(saleRequest.getTotal());
 
         return sale;
