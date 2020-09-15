@@ -27,20 +27,24 @@ public class ProductSold implements Serializable {
     @JoinTable(name = "sale_sold")
     private Sale  sale;
 
-
+    private Double total;
 
     public ProductSold() {
     }
 
-    public ProductSold(Long id, String name, Double price, Double quantity, Sale sale) {
+    public ProductSold(Long id, String name, Double price, Double quantity, Sale sale, Double total) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.sale= sale;
+        this.total = total;
     }
 
 
+    public void setTotal(Double total) {
+        this.total = total;
+    }
 
     public Long getId() {
         return id;
@@ -83,9 +87,12 @@ public class ProductSold implements Serializable {
     }
 
     public Double getTotal(){
-        return this.quantity * this.price;
+        return total;
     }
 
-
+    public Double Total(){
+        this.total = this.quantity * this.price;
+        return this.total;
+    }
 }
 

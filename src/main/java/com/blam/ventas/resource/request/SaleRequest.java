@@ -1,11 +1,12 @@
 package com.blam.ventas.resource.request;
 
 import com.blam.ventas.domain.ProductSold;
-import com.blam.ventas.resource.response.ProductResponse;
+
+import com.blam.ventas.resource.response.ProductSoldResponse;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
 
@@ -72,6 +73,8 @@ public class SaleRequest {
         }
 
         public Double getTotal() {
+
+
             return total;
         }
 

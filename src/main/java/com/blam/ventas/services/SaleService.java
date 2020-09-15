@@ -5,7 +5,7 @@ import com.blam.ventas.domain.Sale;
 import com.blam.ventas.repositories.SaleRepository;
 import com.blam.ventas.resource.response.SaleResponse;
 
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +25,7 @@ public interface SaleService {
 
     Sale newSale();
 
+    Sale save(Sale sale);
 
 
 

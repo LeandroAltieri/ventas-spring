@@ -74,10 +74,7 @@ public class Sale implements Serializable {
     }
 
     public Double getTotal() {
-        Double total = 0.0;
-        for (ProductSold p : products) {
-            total += p.getTotal();
-        }
+
         return total;
     }
 
