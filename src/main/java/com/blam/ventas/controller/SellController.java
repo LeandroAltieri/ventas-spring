@@ -1,9 +1,14 @@
 package com.blam.ventas.controller;
 
-import com.blam.ventas.converter.ProductResponseToProductSoldResponse;
+import com.blam.ventas.converter.ProductResponseToProductSold;
+import com.blam.ventas.converter.SaleRequestToSale;
+import com.blam.ventas.converter.SaleToSaleResponse;
+import com.blam.ventas.domain.ProductSold;
+import com.blam.ventas.domain.Sale;
 import com.blam.ventas.resource.request.ProductRequest;
+import com.blam.ventas.resource.request.SaleRequest;
 import com.blam.ventas.resource.response.ProductResponse;
-import com.blam.ventas.resource.response.ProductSoldResponse;
+import com.blam.ventas.resource.response.SaleResponse;
 import com.blam.ventas.services.ProductService;
 import com.blam.ventas.services.SaleService;
 import org.springframework.http.HttpStatus;
@@ -12,20 +17,25 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 @RestController
 public class SellController {
 
     private final SaleService saleService;
     private final ProductService productService;
-    private final ProductResponseToProductSoldResponse converter;
+    private final ProductResponseToProductSold converter;
+    private final SaleRequestToSale converter1;
+    private final SaleToSaleResponse converter2;
 
-    public ArrayList<ProductSoldResponse> productResponseArrayList = new ArrayList<>();
+    public ArrayList<ProductSold> productResponseArrayList = new ArrayList<>();
 
-    public SellController(SaleService saleService, ProductService productService, ProductResponseToProductSoldResponse converter) {
+    public SellController(SaleService saleService, ProductService productService, ProductResponseToProductSold converter, SaleRequestToSale converter1, SaleToSaleResponse converter2) {
         this.saleService = saleService;
         this.productService = productService;
         this.converter = converter;
+        this.converter1 = converter1;
+        this.converter2 = converter2;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -33,7 +43,7 @@ public class SellController {
     public @ResponseBody
     ResponseEntity<?> getSell() {
         Double total = 0.0;
-        for (ProductSoldResponse p : productResponseArrayList) {
+        for (ProductSold p : productResponseArrayList) {
             total += p.Total();
         }
         return new ResponseEntity<>(total, HttpStatus.OK);
@@ -50,7 +60,7 @@ public class SellController {
         productByName.setQuantity(product.getQuantity());
         productByName.setTotal(productByName.Total());
 
-        ProductSoldResponse productSoldResponse = converter.convert(productByName);
+        ProductSold productSold = converter.convert(productByName);
 
         System.out.println(productByName.getPrice());
         System.out.println(productByName.Total());
@@ -59,12 +69,12 @@ public class SellController {
         boolean isHere = false;
 
         if (productResponseArrayList.isEmpty()) {
-            productResponseArrayList.add(productSoldResponse);
+            productResponseArrayList.add(productSold);
             isHere = true;
             System.out.println("carro vacio");
         } else {
-            for (ProductSoldResponse productResponse : productResponseArrayList) {
-                if (productResponse.getName().equals(product.getName())) {
+            for (ProductSold p : productResponseArrayList) {
+                if (p.getName().equals(product.getName())) {
                     isHere = true;
                     System.out.println("repitio");
                     break;
@@ -73,7 +83,7 @@ public class SellController {
             }
         }
         if (!isHere) {
-            productResponseArrayList.add(productSoldResponse);
+            productResponseArrayList.add(productSold);
             System.out.println("no repite agrega");
         }
 
@@ -91,5 +101,18 @@ public class SellController {
         return new ResponseEntity<>(productResponseArrayList, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(consumes = "Application/json")
+    @RequestMapping("sell/save")
+    public @ResponseBody ResponseEntity <SaleResponse> saveSale(@RequestBody SaleRequest request){
+
+        Sale sale = converter1.convert(request);
+        sale.setDate(Calendar.getInstance().getTime());
+        System.out.println(sale.getTotal());
+        Sale saved = saleService.save(sale);
+        SaleResponse response = converter2.convert(saved);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

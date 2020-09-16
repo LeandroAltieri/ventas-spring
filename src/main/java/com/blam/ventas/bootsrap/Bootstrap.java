@@ -62,6 +62,7 @@ public class Bootstrap implements CommandLineRunner {
         productSold.setName("papa");
         productSold.setPrice(200.0);
         productSold.setQuantity(10.0);
+        productSold.setTotal(productSold.Total());
 
 
         productSoldRepository.save(productSold);
@@ -70,6 +71,7 @@ public class Bootstrap implements CommandLineRunner {
         productSold2.setName("popa");
         productSold2.setPrice(200.0);
         productSold2.setQuantity(10.0);
+        productSold2.setTotal(productSold2.Total());
 
 
         productSoldRepository.save(productSold2);
@@ -78,6 +80,7 @@ public class Bootstrap implements CommandLineRunner {
         productSold3.setName("caca");
         productSold3.setPrice(200.0);
         productSold3.setQuantity(10.0);
+        productSold3.setTotal(productSold3.Total());
 
 
         productSoldRepository.save(productSold3);
@@ -92,6 +95,7 @@ public class Bootstrap implements CommandLineRunner {
         sale.setClientName("porota");
         sale.setProducts(products);
         sale.setDate(Calendar.getInstance().getTime());
+
         sale.setTotal(sale.getTotal());
 
         saleRepository.save(sale);
