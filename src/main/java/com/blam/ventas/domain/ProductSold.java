@@ -87,12 +87,26 @@ public class ProductSold implements Serializable {
     }
 
     public Double getTotal(){
-        return total;
+        return  total;
+
     }
+
 
     public Double Total(){
         this.total = this.quantity * this.price;
-        return this.total;
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductSold{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", sale=" + sale +
+                ", total=" + total +
+                '}';
     }
 }
 

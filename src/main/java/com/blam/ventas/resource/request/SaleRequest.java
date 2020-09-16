@@ -22,22 +22,22 @@ public class SaleRequest {
         private Date date;
 
         @JsonProperty("products")
-        private List<ProductSold> productsSold;
+        private List<ProductSold> products;
 
-        @JsonProperty("total")
-        private Double total;
+        @JsonProperty("saleTotal")
+        private Double saleTotal;
 
         @JsonCreator
         public SaleRequest(@JsonProperty("id") Long id,
                             @JsonProperty("clientName") String clientName,
                             @JsonProperty("date") Date date,
-                            @JsonProperty("products") List<ProductSold> productsSold,
-                            @JsonProperty("total") Double total) {
+                            @JsonProperty("products") List<ProductSold> products,
+                            @JsonProperty("saleTotal") Double saleTotal) {
             this.id = id;
             this.clientName = clientName;
             this.date = date;
-            this.productsSold = productsSold;
-            this.total = total;
+            this.products = products;
+            this.saleTotal = saleTotal;
         }
 
         public Long getId() {
@@ -65,22 +65,32 @@ public class SaleRequest {
         }
 
         public List<ProductSold> getProductsSold() {
-            return productsSold;
+            return products;
         }
 
         public void setProductsSold(List<ProductSold> productsSold) {
-            this.productsSold = productsSold;
-        }
-
-        public Double getTotal() {
-
-
-            return total;
+            this.products = productsSold;
         }
 
         public void setTotal(Double total) {
-            this.total = total;
+        this.saleTotal = saleTotal;
+    }
+
+
+         public Double getTotal() {
+            return saleTotal;
+         }
+
+         public Double productsTotal( List<ProductSold> list) {
+          Double productsTotal = 0.0;
+         for (ProductSold p : list) {
+            productsTotal += p.getTotal();
         }
+        return productsTotal;
+    }
+
+
+
 
         @Override
         public String toString() {
@@ -88,8 +98,8 @@ public class SaleRequest {
                     "id=" + id +
                     ", clientName='" + clientName + '\'' +
                     ", date=" + date +
-                    ", productResponses=" + productsSold +
-                    ", total=" + total +
+                    ", productResponses=" + products +
+                    ", saleTotal=" + saleTotal +
                     '}';
         }
     }

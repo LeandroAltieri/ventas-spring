@@ -2,13 +2,11 @@ package com.blam.ventas.domain;
 
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
+
 import java.util.*;
 
 @Entity
@@ -26,19 +24,21 @@ public class Sale implements Serializable {
 
     @OneToMany(mappedBy = "sale")
     //@OneToMany(cascade = CascadeType.ALL)
-    private List<ProductSold> products = new ArrayList<>();
+    private List<ProductSold> products;
 
-    private Double total;
+    private Double saleTotal;
 
     public Sale() {
     }
 
-    public Sale(Long id, String clientName, Date date, List<ProductSold> products, Double total) {
+
+
+    public Sale(Long id, String clientName, Date date, List<ProductSold> products, Double saleTotal) {
         this.id = id;
         this.clientName = clientName;
         this.date = date;
         this.products = products;
-        this.total = total;
+        this.saleTotal = saleTotal;
     }
 
     public Long getId() {
@@ -75,13 +75,22 @@ public class Sale implements Serializable {
 
     public Double getTotal() {
 
-        return total;
+        return saleTotal;
     }
+
 
     public void setTotal(Double total) {
-        this.total = total;
+        this.saleTotal = total;
     }
 
+    public Double productsTotal( List<ProductSold> list) {
+        Double productsTotal = 0.0;
+        for (ProductSold p : list) {
+            productsTotal += p.getTotal();
+        }
+        System.out.println("lo hago? o soy politico?" + productsTotal);
+        return productsTotal;
+    }
     @Override
     public String toString() {
         return "Sale{" +
@@ -89,7 +98,7 @@ public class Sale implements Serializable {
                 ", clientName='" + clientName + '\'' +
                 ", date=" + date +
                 ", products=" + products +
-                ", total=" + total +
+                ", saleTotal=" + saleTotal +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.blam.ventas.controller;
 
 import com.blam.ventas.converter.SaleRequestToSale;
+import com.blam.ventas.converter.SaleToSaleResponse;
 import com.blam.ventas.domain.Sale;
 import com.blam.ventas.exceptions.BadRequestException;
 import com.blam.ventas.resource.request.SaleRequest;
@@ -10,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +19,11 @@ import java.util.List;
 public class SaleController {
 
     private final SaleService saleService;
-    private final SaleRequestToSale converter;
 
-    public SaleController(SaleService saleService, SaleRequestToSale converter) {
+
+    public SaleController(SaleService saleService) {
         this.saleService = saleService;
-        this.converter = converter;
+
     }
 
 
@@ -60,6 +61,7 @@ public class SaleController {
         return new ResponseEntity<>(saleService.findResponseByDate(date), HttpStatus.OK);
     }
 
+<<<<<<< HEAD
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(consumes = "Application/json")
     @RequestMapping("sales/save")
@@ -70,5 +72,6 @@ public class SaleController {
         Sale saved = saleService.save(sale);
         return new ResponseEntity<>(saved, HttpStatus.OK);
     }*/
+
 
 }

@@ -15,19 +15,19 @@ public class SaleResponse {
 
     private Date date;
 
-    private List<ProductSold> productsSold;
+    private List<ProductSold> products;
 
-    private Double total;
+    private Double saleTotal;
 
     public SaleResponse() {
     }
 
-    public SaleResponse(Long id, String clientName, Date date, List<ProductSold> productsSold, Double total) {
+    public SaleResponse(Long id, String clientName, Date date, List<ProductSold> products, Double saleTotal) {
         this.id = id;
         this.clientName = clientName;
         this.date = date;
-        this.productsSold = productsSold;
-        this.total = total;
+        this.products = products;
+        this.saleTotal = saleTotal;
     }
 
     public Long getId() {
@@ -55,24 +55,20 @@ public class SaleResponse {
     }
 
     public List<ProductSold> getProductsSold() {
-        return productsSold;
+        return products;
     }
 
     public void setProductSoldResponse(List<ProductSold> productsSold) {
-        this.productsSold = productsSold;
+        this.products = productsSold;
     }
 
     public Double getTotal() {
-        Double total = 0.0;
-        for (ProductSold p : productsSold) {
-            total += p.getTotal();
-        }
 
-        return total;
+        return saleTotal;
     }
 
     public void setTotal(Double total) {
-        this.total = total;
+        this.saleTotal = total;
     }
 
     @Override
@@ -81,8 +77,8 @@ public class SaleResponse {
                 "id=" + id +
                 ", clientName='" + clientName + '\'' +
                 ", date=" + date +
-                ", productResponses=" + productsSold +
-                ", total=" + total +
+                ", productResponses=" + products +
+                ", saleTotal=" + saleTotal +
                 '}';
     }
 }
