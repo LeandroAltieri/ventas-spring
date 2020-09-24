@@ -5,6 +5,7 @@ import com.blam.ventas.converter.SaleRequestToSale;
 import com.blam.ventas.converter.SaleToSaleResponse;
 import com.blam.ventas.domain.ProductSold;
 import com.blam.ventas.domain.Sale;
+import com.blam.ventas.repositories.ProductSoldRepository;
 import com.blam.ventas.resource.request.ProductRequest;
 import com.blam.ventas.resource.request.SaleRequest;
 import com.blam.ventas.resource.response.ProductResponse;
@@ -28,14 +29,18 @@ public class SellController {
     private final SaleRequestToSale converter1;
     private final SaleToSaleResponse converter2;
 
+    private final ProductSoldRepository productSoldRepository;
+
+
     public ArrayList<ProductSold> productResponseArrayList = new ArrayList<>();
 
-    public SellController(SaleService saleService, ProductService productService, ProductResponseToProductSold converter, SaleRequestToSale converter1, SaleToSaleResponse converter2) {
+    public SellController(SaleService saleService, ProductService productService, ProductResponseToProductSold converter, SaleRequestToSale converter1, SaleToSaleResponse converter2, ProductSoldRepository productSoldRepository) {
         this.saleService = saleService;
         this.productService = productService;
         this.converter = converter;
         this.converter1 = converter1;
         this.converter2 = converter2;
+        this.productSoldRepository = productSoldRepository;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -43,6 +48,7 @@ public class SellController {
     public @ResponseBody
     ResponseEntity<?> getSell() {
         Double total = 0.0;
+
         for (ProductSold p : productResponseArrayList) {
             total += p.Total();
         }
@@ -106,12 +112,24 @@ public class SellController {
     @RequestMapping("sell/save")
     public @ResponseBody ResponseEntity <SaleResponse> saveSale(@RequestBody SaleRequest request){
 
+        System.out.println(request);
         Sale sale = converter1.convert(request);
         sale.setDate(Calendar.getInstance().getTime());
         System.out.println(sale.getTotal());
+        sale.setProducts(productResponseArrayList);
+        //Sale saved = saleService.save(sale);
+
         Sale saved = saleService.save(sale);
+
+        saved.getProducts().forEach(productSold -> {
+            productSold.setId(0L);
+            productSold.setSale(saved);
+            productSoldRepository.save(productSold);
+        });
+
         SaleResponse response = converter2.convert(saved);
 
+        productResponseArrayList = new ArrayList<ProductSold>();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

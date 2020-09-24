@@ -2,6 +2,7 @@ package com.blam.ventas.controller;
 
 import com.blam.ventas.converter.SaleRequestToSale;
 import com.blam.ventas.converter.SaleToSaleResponse;
+import com.blam.ventas.domain.ProductSold;
 import com.blam.ventas.domain.Sale;
 import com.blam.ventas.exceptions.BadRequestException;
 import com.blam.ventas.resource.request.SaleRequest;
@@ -32,6 +33,7 @@ public class SaleController {
     public @ResponseBody
     ResponseEntity<List<SaleResponse>> getAllSales() {
         List<SaleResponse> sales = saleService.findAllResponse();
+
         return new ResponseEntity<>(sales, HttpStatus.OK);
     }
 

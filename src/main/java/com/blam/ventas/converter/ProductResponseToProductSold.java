@@ -14,6 +14,7 @@ public class ProductResponseToProductSold implements Converter<ProductResponse, 
             return null;
         }
         final ProductSold sold = new ProductSold();
+        sold.setId(productResponse.getId());
         sold.setName(productResponse.getName());
         sold.setQuantity(productResponse.getQuantity());
         sold.setPrice(productResponse.getPrice());

@@ -1,12 +1,15 @@
 package com.blam.ventas.converter;
 
 import com.blam.ventas.domain.Sale;
+import com.blam.ventas.repositories.ProductSoldRepository;
 import com.blam.ventas.resource.request.SaleRequest;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SaleRequestToSale implements Converter<SaleRequest, Sale> {
+
+
     @Override
     public Sale convert(SaleRequest saleRequest) {
         if(saleRequest==null) {

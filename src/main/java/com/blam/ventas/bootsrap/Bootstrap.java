@@ -96,7 +96,7 @@ public class Bootstrap implements CommandLineRunner {
         sale.setProducts(products);
         sale.setDate(Calendar.getInstance().getTime());
 
-        sale.setTotal(sale.getTotal());
+        sale.setTotal(300.00);
 
         saleRepository.save(sale);
 
