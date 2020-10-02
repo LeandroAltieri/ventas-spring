@@ -57,6 +57,15 @@ public class SellController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/resetList")
+    public @ResponseBody
+    ResponseEntity<?> getResetList() {
+
+        productResponseArrayList = new ArrayList<ProductSold>();
+        return new ResponseEntity<>(productResponseArrayList, HttpStatus.OK);
+
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(produces = "application/json", consumes = "application/json")
     @RequestMapping("/sell/add")
     public @ResponseBody

@@ -32,7 +32,7 @@ public class Bootstrap implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) throws Exception {/*
 
         Sale sale  = new Sale();
 
@@ -119,5 +119,5 @@ public class Bootstrap implements CommandLineRunner {
         System.out.println("Product by name " + productService.findByName("Quilmes").toString());
 
         //System.out.println("Sale date:" + sale.getDate().toString());
-    }
+    */}
 }
