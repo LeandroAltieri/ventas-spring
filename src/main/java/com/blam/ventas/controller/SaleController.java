@@ -27,7 +27,7 @@ public class SaleController {
 
     }
 
-
+    // para commitear
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/sales/list")
     public @ResponseBody
