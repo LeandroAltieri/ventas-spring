@@ -22,7 +22,7 @@ public class Sale implements Serializable {
     @Type(type = "date")
     private Date date;
 
-    @OneToMany(mappedBy = "sale")
+    @OneToMany(mappedBy = "sale", fetch = FetchType.EAGER) // HAY QUE PONERLO PARA QUE TE TRAIGA EL OBJETO COMPLETO
     //@OneToMany(cascade = CascadeType.ALL)
     private List<ProductSold> products;
 
